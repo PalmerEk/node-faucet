@@ -1,0 +1,30 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  color: #5a5a5a;
+  margin-bottom: 60px;
+  background-color: #eee0a7;
+  text-align: center;
+}
+ul,
+li {
+  list-style-type: none;
+}
+#recaptcha_area {
+  margin: 0 auto;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+/* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}

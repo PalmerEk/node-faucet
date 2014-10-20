@@ -1,0 +1,10 @@
+<div class='col-md-3'>
+  <img src="http://dummyimage.com/250x250/000/fff&text=250+x+250+Ad+Placeholder+1" />
+  <h2>Our Rewards</h2>
+  {% for payout in settings.payout.bracket %}
+    <strong>{{ payout.amt }}</strong> DOGE ({{ payout.odds }}%)
+  <br />  
+  {% endfor %}
+  <br />
+  <img src="http://dummyimage.com/250x250/000/fff&text=250+x+250+Ad+Placeholder+2" />
+</div>

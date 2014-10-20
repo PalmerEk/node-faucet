@@ -1,0 +1,77 @@
+{% extends '../views/layout.html' %}
+
+{% block meta %}
+	{% parent %}
+{% endblock %}
+
+{% block body %}
+<div class='col-md-6'>
+  <img src="http://dummyimage.com/468x60/000/fff&text=468+x+60+Ad+Placeholder+1" />
+  <p>
+    <strong><a href="http://google.com">Text Link 1</a>
+    </strong>- Text Link 1 text
+  </p>
+
+  <h3>Get free Dogecoins from The Block Chain!</h3>
+  <p>Faucet Balance {{ faucetBalance }} DOGE</p>
+
+  <script>
+   var RecaptchaOptions = {theme : 'white'};
+  </script>
+
+  <form action='.' method='POST'>
+    <div class='ad well'>
+      <p>Want to get free DOGE?</p>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <input type='text' id="address" name='address' class="form-control input-large" required="" placeholder='Enter your Dogecoin Address' value="" tabindex="1">
+        </div>
+      </div>
+
+      {% if error %}
+        <div class="form-group">
+          <div class="col-xs-12">
+            <div class="alert alert-danger" role="alert">{{error}}</div>
+          </div>
+        </div>
+      {% elseif success %}
+        <div class="form-group">
+          <div class="col-xs-12">
+            <div class="alert alert-success" role="alert">You've been awarded {{dispenseAmt}} DOGE!  Your current balance is now {{userBalance}} DOGE</div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div id="recaptcha_area" class="form-group">
+        {{recaptcha_form|raw}}
+      </div>
+    </div>
+
+
+    <div class='well'>
+      <img src="http://dummyimage.com/468x60/000/fff&text=468+x+60+Ad+Placeholder+2" />
+    </div>
+
+    <div>
+      <ul>
+        <li><i class='icon-hand-right'></i> Earn <strong>{{ payoutRange.min }}</strong> to <strong>{{ payoutRange.max }}</strong> DOGE per dispense!</li>
+        <li><i class='icon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency }} minutes</strong>!</li>
+        <li><i class='icon-ok'></i> No work needed - just click!</li>
+        <li><i class='icon-bell'></i> <strong>Instant</strong> as soon as you reach cashout threshold of {{ settings.payout.minCashout }} DOGE</li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <input type='submit' class='btn btn-primary btn-block' value='Collect DOGE'>
+    </div>
+  </form>
+
+  <img src="http://dummyimage.com/468x60/000/fff&text=468+x+60+Ad+Placeholder+3" />
+  <p>
+    <strong><a href="http://google.com">Text Link 2</a>
+    </strong>- Text Link 2 text
+  </p>
+</div>
+{% endblock %}
+
+
