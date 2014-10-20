@@ -26,13 +26,13 @@ function showFaucet(req, res, next) {
 }
 
 function validateCaptcha(req, res, next) {
-	var recaptcha = new Recaptcha(settings.recaptcha.key, settings.recaptcha.secret);
-
 	var data = {
         remoteip:  req.connection.remoteAddress,
         challenge: req.body.recaptcha_challenge_field,
         response:  req.body.recaptcha_response_field
     };
+
+    var recaptcha = new Recaptcha(settings.recaptcha.key, settings.recaptcha.secret, data);
 
     recaptcha.verify(function(success, err) {
     	res.captchaPassed = success;
