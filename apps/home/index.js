@@ -35,9 +35,8 @@ function validateCaptcha(req, res, next) {
     };
 
     recaptcha.verify(function(success, err) {
-    	//res.captchaPassed = success;
-    	//if(!success) res.locals.error = "Captcha Invalid.  Please Try Again!"
-    	res.captchaPassed = true;
+    	res.captchaPassed = success;
+    	if(!success) res.locals.error = "Captcha Invalid.  Please Try Again!"
     	next();
     });
 }
