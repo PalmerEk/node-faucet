@@ -38,6 +38,11 @@
         <div class="form-group">
           <div class="col-xs-12">
             <div class="alert alert-success" role="alert">You've been awarded {{dispenseAmt}} DOGE!  Your current balance is now {{userBalance}} DOGE</div>
+            
+            {% if settings.payout.referralPct > 0 %}
+              <div class="alert alert-success" role="alert">Earn an amazing {{settings.payout.referralPct}}% commision on all referrals!</div>
+              <div class="alert alert-success" role="alert">Your referral address: <a href="?r={{address}}">?r={{address}}</a></div>
+            {% endif %}
           </div>
         </div>
       {% endif %}

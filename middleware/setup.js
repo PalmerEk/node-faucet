@@ -1,12 +1,13 @@
 var settings = require('../settings');
 var util = require('util');
+var _ = require('underscore');
 
 module.exports.init = function(req, res, next) {
 	req.coinRPC = require('node-dogecoin')()
 		.set('host', settings.rpc.host)
-		.auth(settings.rpc.user, process.env.walletPWD);
+		.auth(settings.rpc.user, settings.rpc.password);
 
-	req.dbConn = require('mysql').createPool(settings.database);
+	req.dbConn = require('mysql').createPool(_.extend(settings.database, settings.database));;
 
 	next();
 };

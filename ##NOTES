@@ -1,1 +1,4 @@
-TODO: process Payouts
+TODO: 
+Log payments.  Need to store transactionID's for each payment.  Maybe instead of dispensed (time could be determined from blockchain)
+
+

@@ -13,7 +13,7 @@ app.get('/', captureReferrer, showFaucet);
 app.post('/', validateCaptcha, validateAddress, validateFrequency, dispense, showFaucet);
 
 function captureReferrer(req, res, next) {
-    if(req.query.r) req.session.referrer = req.query.r;
+    if(req.query.r && settings.payout.referralPct > 0) req.session.referrer = req.query.r;
     next();
 }
 
@@ -44,6 +44,7 @@ function validateCaptcha(req, res, next) {
 function validateAddress(req, res, next) {
 	req.coinRPC.validateaddress(req.body.address, function(err, info) {
 		res.addressValid = !info.isvalid;
+		res.locals.address = req.body.address;
 		if(!info.isvalid) res.locals.error = "Invalid Dogecoin Address"
 		next();
 	})

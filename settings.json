@@ -1,34 +1,32 @@
 {
     "port": 8080,
-    
+
     "rpc": {
         "host": "localhost",
         "port": 44663,
-        "user": "dogecoinrpc"
+        "user": "dogecoinrpc",
     },
 
     "session": {
-        "secret": "5ecretsR4Bi0tches",
-        "key": "nodefuacet.sid"
     }, 
+
+    "recaptcha": {
+        "key": "6LdxOvwSAAAAABBLb-E7uFMUOvGFI3wEvBWaUBwL"
+    },
 
     "database": {
         "host": "localhost",
         "connectionLimit": 10,
         "database": "faucet",
         "user": "root",
-        "password": "xxxxxxxxx"
-    },
-
-    "recaptcha": {
-        "secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "key": "6LdxOvwSAAAAABBLb-E7uFMUOvGFI3wEvBWaUBwL"
     },
 
     "payout": {
-        "frequency": 60, 
+        "frequency": 15, 
         "minCashout": 10,
         "accumulate": true,
+        "referralPct": 25,
+        "dispenseFrequency": 1440,
         "bracket":
             [{"amt": 1, "odds": 38.0},
             {"amt": 2, "odds": 32.0},
