@@ -20,39 +20,39 @@
   </script>
 
   <form action='.' method='POST'>
-    <div class='ad well'>
-      <p>Want to get free DOGE?</p>
-      <div class="form-group">
-        <div class="col-xs-12">
-          <input type='text' id="address" name='address' class="form-control input-large" required="" placeholder='Enter your Dogecoin Address' value="" tabindex="1">
-        </div>
-      </div>
-
-      {% if error %}
-        <div class="form-group">
-          <div class="col-xs-12">
-            <div class="alert alert-danger" role="alert">{{error}}</div>
-          </div>
-        </div>
-      {% elseif success %}
+      {% if success %}
         <div class="form-group">
           <div class="col-xs-12">
             <div class="alert alert-success" role="alert">You've been awarded {{dispenseAmt}} DOGE!  Your current balance is now {{userBalance}} DOGE</div>
             
             {% if settings.payout.referralPct > 0 %}
               <div class="alert alert-success" role="alert">Earn an amazing {{settings.payout.referralPct}}% commision on all referrals!</div>
-              <div class="alert alert-success" role="alert">Your referral address: <a href="?r={{address}}">?r={{address}}</a></div>
+              <div class="alert alert-success" role="alert">Your referral address: <a href="{{referralURL}}">{{referralURL}}</a></div>
             {% endif %}
           </div>
         </div>
+      {% else %}
+        <div class='ad well'>
+          <p>Want to get free DOGE?</p>
+          <div class="form-group">
+            <div class="col-xs-12">
+              <input type='text' id="address" name='address' class="form-control input-large" required="" placeholder='Enter your Dogecoin Address' value="" tabindex="1">
+            </div>
+          </div>
+
+          {% if error %}
+            <div class="form-group">
+              <div class="col-xs-12">
+                <div class="alert alert-danger" role="alert">{{error}}</div>
+              </div>
+            </div>
+          {% endif %}
+
+          <div id="recaptcha_area" class="form-group">
+            {{recaptcha_form|raw}}
+          </div>
+        </div>
       {% endif %}
-
-      <div id="recaptcha_area" class="form-group">
-        {{recaptcha_form|raw}}
-      </div>
-    </div>
-
-
     <div class='well'>
       <img src="http://dummyimage.com/468x60/000/fff&text=468+x+60+Ad+Placeholder+2" />
     </div>

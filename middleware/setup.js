@@ -1,4 +1,4 @@
-var settings = require('../settings');
+var settings = require(process.env.settingsFile || '../settings');
 var util = require('util');
 var _ = require('underscore');
 
@@ -19,7 +19,7 @@ module.exports.settings = function(req, res, next){
 
 	req.coinRPC.getBalance(function(err, info) {
 		getFaucetStats(req, function(err, stats) {
-			res.locals.faucetStats = stats;
+			res.locals.faucetStats = stats || 0;
 			res.locals.faucetBalance = info - stats.outstandingPayments;
 			next();
 		});

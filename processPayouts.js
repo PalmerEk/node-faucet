@@ -1,6 +1,6 @@
 var util = require("util");
 
-var settings = require('./settings')
+var settings = require(process.env.settingsFile || './settings')
 
 var coinRPC = require('node-dogecoin')()
 		.set('host', settings.rpc.host)
@@ -24,7 +24,7 @@ function getPayees(lastPayTime, callback) {
 }
 
 function getReferrers(lastPayTime, callback) {
-  	dbConn.query('SELECT referrer, (SUM(amount) * ?) AS payAmt FROM transactions WHERE ts < ? AND dispensed IS NULL AND referrer IS NOT NULL GROUP BY referrer', [settings.payout.referralPct, lastPayTime], function(err, rows, fields) {
+  	dbConn.query('SELECT referrer, (SUM(amount) * ?) AS payAmt FROM transactions WHERE ts < ? AND dispensed IS NULL AND referrer IS NOT NULL GROUP BY referrer', [(settings.payout.referralPct/100), lastPayTime], function(err, rows, fields) {
   		callback(err, rows.map(function(row) {
   			return {to: row.referrer, amt: row.payAmt}
   		}));

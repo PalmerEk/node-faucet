@@ -1,24 +1,30 @@
 {
-    "port": 8080,
+    "port": 3000,
 
     "rpc": {
         "host": "localhost",
         "port": 44663,
-        "user": "dogecoinrpc",
+        "user": "",
+        "password": ""
     },
 
     "session": {
+        "secret": "",
+        "key": ""
     }, 
 
     "recaptcha": {
-        "key": "6LdxOvwSAAAAABBLb-E7uFMUOvGFI3wEvBWaUBwL"
+        "secret": "",
+        "key": ""
     },
+
 
     "database": {
         "host": "localhost",
         "connectionLimit": 10,
         "database": "faucet",
-        "user": "root",
+        "user": "",
+        "password": ""
     },
 
     "payout": {

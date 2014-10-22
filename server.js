@@ -2,9 +2,10 @@ var express = require('express')
   , swig = require('swig')
   , http = require('http')
   , path = require('path')
-  , util = require('util');
+  , util = require('util')
+  , Cookies = require( "cookies" );
 
-var settings = require('./settings')
+var settings = require(process.env.settingsFile || './settings')
   , log = require('./lib/logger');
 
 var env = process.env.NODE_ENV || 'development';
@@ -31,11 +32,7 @@ app.set('views', VIEWS_DIR);
 app.use(require('serve-favicon')(path.join(__dirname, 'public/favicon.ico')));
 app.use(require('body-parser')());;
 app.use(require('method-override')());
-app.use(require('cookie-parser')(settings.session.secret));
-app.use(require('cookie-session')({
-  keys: ['key1', 'key2'],
-  secureProxy: true // if you do SSL outside of node
-}));
+app.use(Cookies.express(settings.session.key));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(require('serve-static')(path.join(__dirname, 'public')));
 

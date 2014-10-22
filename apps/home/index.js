@@ -1,19 +1,21 @@
 var express = require('express');
 var app = module.exports = express();
 var util = require("util");
+var url = require('url');
 
-var settings = require('../../settings')
+var settings = require(process.env.settingsFile || '../../settings')
 
 var Recaptcha = require('recaptcha').Recaptcha;
 
 app.set('views', __dirname);
 
 app.get('/', captureReferrer, showFaucet);
-
 app.post('/', validateCaptcha, validateAddress, validateFrequency, dispense, showFaucet);
 
 function captureReferrer(req, res, next) {
-    if(req.query.r && settings.payout.referralPct > 0) req.session.referrer = req.query.r;
+	var day = (24*60*60*1000);
+
+    if(req.query.r && settings.payout.referralPct > 0) req.cookies.set('referrer', req.query.r, {maxAge: (day*360), expires: new Date(Date.now() + (day*360))});
     next();
 }
 
@@ -45,6 +47,8 @@ function validateAddress(req, res, next) {
 	req.coinRPC.validateaddress(req.body.address, function(err, info) {
 		res.addressValid = !info.isvalid;
 		res.locals.address = req.body.address;
+
+		res.locals.referralURL = util.format('%s?r=%s', 'http://doge.bloquechain.com', req.body.address);
 		if(!info.isvalid) res.locals.error = "Invalid Dogecoin Address"
 		next();
 	})
@@ -77,7 +81,7 @@ function dispense(req, res, next) {
 	}
 
 	req.dbConn.query('INSERT INTO transactions (address, ip, amount, referrer) VALUES (?,?,?,?)', 
-		[req.body.address, req.connection.remoteAddress, res.locals.dispenseAmt, req.session.referrer, false], function(err, result) {
+		[req.body.address, req.connection.remoteAddress, res.locals.dispenseAmt, req.cookies.get('referrer'), false], function(err, result) {
 	  	if (err) throw err;
 
 	  	if(result.affectedRows === 1) {
@@ -90,8 +94,6 @@ function dispense(req, res, next) {
 			res.locals.error = "Error dispenseing, please try again."
 			next()
 		}
-
-	  
 	});
 }
 
