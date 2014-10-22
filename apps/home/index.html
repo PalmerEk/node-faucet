@@ -22,23 +22,24 @@
   <form action='.' method='POST'>
       {% if success %}
         <div class="form-group">
-          <div class="col-xs-12">
-            <div class="alert alert-success" role="alert">You've been awarded {{dispenseAmt}} DOGE!  Your current balance is now {{userBalance}} DOGE</div>
+          <div class="col-xs-12 alert alert-success" role="alert">
+            <div>You've been awarded {{dispenseAmt}} DOGE!  Your current balance is now {{userBalance}} DOGE</div></br>
             
             {% if settings.payout.referralPct > 0 %}
-              <div class="alert alert-success" role="alert">Earn an amazing {{settings.payout.referralPct}}% commision on all referrals!</div>
-              <div class="alert alert-success" role="alert">Your referral address: <a href="{{referralURL}}">{{referralURL}}</a></div>
+              <div>Earn an amazing {{settings.payout.referralPct}}% commision on all referrals!</div></br>
+              <div>Your referral address: <a href="{{referralURL}}">{{referralURL}}</a></div></br>
             {% endif %}
           </div>
         </div>
       {% else %}
-        <div class='ad well'>
+        <div class='well'>
           <p>Want to get free DOGE?</p>
           <div class="form-group">
             <div class="col-xs-12">
               <input type='text' id="address" name='address' class="form-control input-large" required="" placeholder='Enter your Dogecoin Address' value="" tabindex="1">
             </div>
           </div>
+          <div class="clearfix"></div>
 
           {% if error %}
             <div class="form-group">
@@ -46,11 +47,13 @@
                 <div class="alert alert-danger" role="alert">{{error}}</div>
               </div>
             </div>
+            <div class="clearfix"></div>
           {% endif %}
 
           <div id="recaptcha_area" class="form-group">
             {{recaptcha_form|raw}}
           </div>
+          <div class="clearfix"></div>
         </div>
       {% endif %}
     <div class='well'>
@@ -59,11 +62,11 @@
 
     <div>
       <ul>
-        <li><i class='icon-hand-right'></i> Earn <strong>{{ payoutRange.min }}</strong> to <strong>{{ payoutRange.max }}</strong> DOGE per dispense!</li>
-        <li><i class='icon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency }} minutes</strong>!</li>
-        <li><i class='icon-ok'></i> No work needed - just click!</li>
-        <li><i class='icon-time'></i> Payouts processed every <strong>{{ settings.payout.dispenseFrequency}}</strong> minutes.</li>
-        <li><i class='icon-bell'></i>Minimum for payout is only <strong>{{ settings.payout.minCashout }}<strong> DOGE.</li>
+        <li><i class='glyphicon glyphicon-hand-right'></i> Earn <strong>{{ payoutRange.min }}</strong> to <strong>{{ payoutRange.max }}</strong> DOGE per dispense!</li>
+        <li><i class='glyphicon glyphicon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency }} minutes</strong>!</li>
+        <li><i class='glyphicon glyphicon-ok'></i> No work needed - just click!</li>
+        <li><i class='glyphicon glyphicon-time'></i> Payouts processed every <strong>{{ settings.payout.dispenseFrequency}}</strong> minutes.</li>
+        <li><i class='glyphicon glyphicon-bell'></i> Minimum for payout is only <strong>{{ settings.payout.minCashout }}<strong> DOGE.</li>
       </ul>
     </div>
 
@@ -72,7 +75,15 @@
     </div>
   </form>
 
-  <img src="http://dummyimage.com/468x60/000/fff&text=468+x+60+Ad+Placeholder+3" />
+  <center>
+    <div>
+        <iframe scrolling="no" frameborder="0" src="//adbit.co/adspace.php?a=2KX6N0W1ZO359" style="overflow:hidden;width:468px;height:60px;"></iframe>
+    </div>
+    <div>
+        <a href="//adbit.co/?a=Advertise&b=View_Bid&c=2KX6N0W1ZO359" target="_blank">&#8657; Your Ad Here &#8657;</a>
+    </div>
+  </center>
+
   <p>
     <strong><a href="http://google.com">Text Link 2</a>
     </strong>- Text Link 2 text
