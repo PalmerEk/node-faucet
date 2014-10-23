@@ -10,7 +10,8 @@ module.exports.settings = function(req, res, next){
 	res.locals.payoutRange = {min: settings.payout.bracket[0].amt, max: settings.payout.bracket[settings.payout.bracket.length-1].amt};  	
 
 	res.locals.address = _.isUndefined(req.cookies.get('lastAddress')) ? '' : req.cookies.get('lastAddress')
-
+	res.locals.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+	
 	coinRPC.getBalance(function(err, balance) {
 		db.getFaucetStats(function(err, stats) {
 			res.locals.faucetStats = stats || {outstandingPayments: 0};

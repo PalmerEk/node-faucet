@@ -35,7 +35,7 @@ function showFaucet(req, res, next) {
 
 function validateCaptcha(req, res, next) {
 	var data = {
-        remoteip:  req.connection.remoteAddress,
+        remoteip:  res.locals.ip,
         challenge: req.body.recaptcha_challenge_field,
         response:  req.body.recaptcha_response_field
     };
@@ -65,7 +65,7 @@ function validateAddress(req, res, next) {
 }
 
 function validateFrequency(req, res, next) {
-	db.getTimeUntilNextDispence(req.body.address, req.connection.remoteAddress, function(err, row, fields) {
+	db.getTimeUntilNextDispence(req.body.address, res.locals.ip, function(err, row, fields) {
 		if(row) res.locals.error = "Too Soon!  Come back in " + row.remainingTime;
 		next();
 	});
@@ -86,7 +86,7 @@ function dispense(req, res, next) {
 		}
 	}
 
-	db.dispense(req.body.address, req.connection.remoteAddress, res.locals.dispenseAmt, req.cookies.get('referrer'), function(err, success) {
+	db.dispense(req.body.address, res.locals.ip, res.locals.dispenseAmt, req.cookies.get('referrer'), function(err, success) {
 		res.locals.success = success;
 
 		if(success) {
