@@ -12,7 +12,7 @@
     </strong>- Text Link 1 text
   </p>
 
-  <h3>Get free Dogecoins from The Block Chain!</h3>
+  <h3>Get free Dogecoins from {{ settings.site.name }}!</h3>
   <p>Faucet Balance {{ faucetBalance }} DOGE</p>
 
   <script>
@@ -63,9 +63,9 @@
     <div>
       <ul>
         <li><i class='glyphicon glyphicon-hand-right'></i> Earn <strong>{{ payoutRange.min }}</strong> to <strong>{{ payoutRange.max }}</strong> DOGE per dispense!</li>
-        <li><i class='glyphicon glyphicon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency }} minutes</strong>!</li>
+        <li><i class='glyphicon glyphicon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency|humanizeDuration('minutes') }}</strong>!</li>
         <li><i class='glyphicon glyphicon-ok'></i> No work needed - just click!</li>
-        <li><i class='glyphicon glyphicon-time'></i> Payouts processed every <strong>{{ settings.payout.dispenseFrequency}}</strong> minutes.</li>
+        <li><i class='glyphicon glyphicon-time'></i> Payouts processed every <strong>{{ settings.payout.dispenseFrequency|humanizeDuration('minutes') }}</strong>.</li>
         <li><i class='glyphicon glyphicon-bell'></i> Minimum for payout is only <strong>{{ settings.payout.minCashout }}<strong> DOGE.</li>
       </ul>
     </div>
@@ -75,6 +75,7 @@
     </div>
   </form>
 
+  {#
   <center>
     <div>
         <iframe scrolling="no" frameborder="0" src="//adbit.co/adspace.php?a=2KX6N0W1ZO359" style="overflow:hidden;width:468px;height:60px;"></iframe>
@@ -83,6 +84,7 @@
         <a href="//adbit.co/?a=Advertise&b=View_Bid&c=2KX6N0W1ZO359" target="_blank">&#8657; Your Ad Here &#8657;</a>
     </div>
   </center>
+  #}
 
   <p>
     <strong><a href="http://google.com">Text Link 2</a>

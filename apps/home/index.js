@@ -5,6 +5,10 @@ var url = require('url');
 
 var settings = require(process.env.settingsFile || '../../settings')
 
+var db = require('../../lib/db');
+var coinRPC = require('../../lib/coinRPC');
+
+var _ = require('underscore');
 var Recaptcha = require('recaptcha').Recaptcha;
 
 app.set('views', __dirname);
@@ -44,24 +48,20 @@ function validateCaptcha(req, res, next) {
 }
 
 function validateAddress(req, res, next) {
-	req.coinRPC.validateaddress(req.body.address, function(err, info) {
-		res.addressValid = !info.isvalid;
+	coinRPC.validateAddress(req.body.address, function(err, isValid) {
+		res.addressValid = isValid;
 		res.locals.address = req.body.address;
 
-		res.locals.referralURL = util.format('%s?r=%s', 'http://doge.bloquechain.com', req.body.address);
-		if(!info.isvalid) res.locals.error = "Invalid Dogecoin Address"
+		res.locals.referralURL = util.format('%s?r=%s', settings.site.url, req.body.address);
+		if(!isValid) res.locals.error = "Invalid Dogecoin Address"
 		next();
 	})
 }
 
 function validateFrequency(req, res, next) {
-	req.dbConn.query('SELECT TIMEDIFF(DATE_ADD(ts, INTERVAL ? MINUTE), NOW()) AS remainingTime FROM transactions WHERE (address=? OR ip=?) AND ts > DATE_SUB(NOW(), INTERVAL ? MINUTE);', 
-		[settings.payout.frequency, req.body.address, req.connection.remoteAddress, settings.payout.frequency], function(err, rows, fields) {
-	  if (err) throw err;
-
-	  res.addressValid = rows.length === 0;
-	  if(rows.length > 0) res.locals.error = "Too Soon!  Come back in " + rows[0].remainingTime;
-	  next();
+	db.getTimeUntilNextDispence(req.body.address, req.connection.remoteAddress, function(err, row, fields) {
+		if(row) res.locals.error = "Too Soon!  Come back in " + rows.remainingTime;
+		next();
 	});
 }
 
@@ -80,16 +80,14 @@ function dispense(req, res, next) {
 		}
 	}
 
-	req.dbConn.query('INSERT INTO transactions (address, ip, amount, referrer) VALUES (?,?,?,?)', 
-		[req.body.address, req.connection.remoteAddress, res.locals.dispenseAmt, req.cookies.get('referrer'), false], function(err, result) {
-	  	if (err) throw err;
+	db.dispense(req.body.address, req.connection.remoteAddress, res.locals.dispenseAmt, req.cookies.get('referrer'), function(err, success) {
+		res.locals.success = success;
 
-	  	if(result.affectedRows === 1) {
-		  res.locals.success = true;
-		  checkUserBalance(req, function(err, balance) {
-		  	res.locals.userBalance = balance;
-		  	next();
-		  })
+		if(success) {
+			db.getUserBalance(req.body.address, function(err, balance) {
+				res.locals.userBalance = balance;
+				next();
+			});
 		} else {
 			res.locals.error = "Error dispenseing, please try again."
 			next()
@@ -97,9 +95,4 @@ function dispense(req, res, next) {
 	});
 }
 
-function checkUserBalance(req, callback) {
-	req.dbConn.query('SELECT SUM(amount) AS userBalance FROM transactions WHERE dispensed is NULL AND address=?', [req.body.address], function(err, rows, fields) {
-	  callback(err, rows[0].userBalance);
-	});
-}
 

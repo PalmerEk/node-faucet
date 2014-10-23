@@ -14,12 +14,14 @@ var app = module.exports = express();
 // setup SWIG
 var VIEWS_DIR = path.join(__dirname, 'apps/views');
 app.engine('html', swig.renderFile);
+require('./lib/filters')(swig);
 
 if(env == 'development'){
-  swig.setDefaults({root: VIEWS_DIR, allowErrors: true, cache: false, filters: require('./lib/filters')});
+  swig.setDefaults({root: VIEWS_DIR, allowErrors: true, cache: false});
+  //, filters: require('./lib/filters')
   app.use(require('morgan')({ format: 'dev', immediate: true }));
 } else {
-  swig.setDefaults({root: VIEWS_DIR, allowErrors: false, cache: "memory", filters: require('./lib/filters')});
+  swig.setDefaults({root: VIEWS_DIR, allowErrors: false, cache: "memory"});
 };
 
 app.set('view cache', false); // let swig handle the template cacheing
@@ -49,7 +51,7 @@ var middleware = {
 
 app.get('/ping', function(req,res) {return res.send(200);} );
 
-app.all('*', middleware.setup.init, middleware.setup.settings, middleware.setup.defaults);
+app.all('*', middleware.setup.settings, middleware.setup.defaults);
 
 app.use(require('./apps/home'));
 app.use(require('./apps/policy'));
