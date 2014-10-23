@@ -9,6 +9,8 @@ module.exports.settings = function(req, res, next){
 	res.locals.settings = settings;
 	res.locals.payoutRange = {min: settings.payout.bracket[0].amt, max: settings.payout.bracket[settings.payout.bracket.length-1].amt};  	
 
+	res.locals.address = _.isUndefined(req.cookies.get('lastAddress')) ? '' : req.cookies.get('lastAddress')
+
 	coinRPC.getBalance(function(err, balance) {
 		db.getFaucetStats(function(err, stats) {
 			res.locals.faucetStats = stats || {outstandingPayments: 0};

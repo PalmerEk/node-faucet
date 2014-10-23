@@ -5,109 +5,124 @@
 {% endblock %}
 
 {% block body %}
-<div class='col-md-6'>
-  <center>
-    <div>
-        <!--iframe scrolling="no" frameborder="0" src="//adbit.co/adspace.php?a=ULJAPG7SFHT2L" style="overflow:hidden;width:468px;height:60px;"></iframe-->
+<div class='row-fluid'>
+  <div class='col-md-12'>
+    <center>
+      <div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- doge-bloquechain-horiz1 -->
+        <ins class="adsbygoogle"
+         style="display:inline-block;width:970px;height:90px"
+         data-ad-client="ca-pub-1458059981031929"
+         data-ad-slot="3987272091"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </center>
+  </div>  
+</div>  
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- doge-bloquechain-horiz1 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:970px;height:90px"
-     data-ad-client="ca-pub-1458059981031929"
-     data-ad-slot="3987272091"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<div class='row-fluid'>
+  <div class='col-md-3'>
+    {% block left %}
+      {% include "partials/_left.html" %}
+    {% endblock %}
+  </div>
 
-    </div>
-  </center>
+  <div class='col-md-6'>
+    <p>
+      <strong><a href="http://bleutrade.com">Bleutrade</a>
+      </strong>- The secure, fast and reliable cryptocurrency exchange
+    </p>
 
-  <p>
-    <strong><a href="http://bleutrade.com">Bleutrade</a>
-    </strong>- The secure, fast and reliable cryptocurrency exchange
-  </p>
+    <h3>Get free Dogecoins from {{ settings.site.name }}!</h3>
+    <p>Faucet Balance {{ faucetBalance }} DOGE</p>
 
-  <h3>Get free Dogecoins from {{ settings.site.name }}!</h3>
-  <p>Faucet Balance {{ faucetBalance }} DOGE</p>
+    <script>
+     var RecaptchaOptions = {theme : 'white'};
+    </script>
 
-  <script>
-   var RecaptchaOptions = {theme : 'white'};
-  </script>
-
-  <form action='.' method='POST'>
-      {% if success %}
-        <div class="form-group">
-          <div class="col-xs-12 alert alert-success" role="alert">
-            <div>You've been awarded {{dispenseAmt}} DOGE!  Your current balance is now {{userBalance}} DOGE</div></br>
-            
-            {% if settings.payout.referralPct > 0 %}
-              <div>Earn an amazing {{settings.payout.referralPct}}% commision on all referrals!</div></br>
-              <div>Your referral address: <a href="{{referralURL}}">{{referralURL}}</a></div></br>
-            {% endif %}
-          </div>
-        </div>
-      {% else %}
-        <div class='well'>
-          <p>Want to get free DOGE?</p>
+    <form action='.' method='POST'>
+        {% if success %}
           <div class="form-group">
-            <div class="col-xs-12">
-              <input type='text' id="address" name='address' class="form-control input-large" required="" placeholder='Enter your Dogecoin Address' value="" tabindex="1">
+            <div class="col-xs-12 alert alert-success" role="alert">
+              <div>You've been awarded {{dispenseAmt}} DOGE!  Your current balance is now {{userBalance}} DOGE</div></br>
+              
+              {% if settings.payout.referralPct > 0 %}
+                <div>Earn an amazing {{settings.payout.referralPct}}% commision on all referrals!</div></br>
+                <div>Your referral address: <a href="{{referralURL}}">{{referralURL}}</a></div></br>
+              {% endif %}
             </div>
           </div>
-          <div class="clearfix"></div>
-
-          {% if error %}
+        {% else %}
+          <div class='well'>
+            <p>Want to get free DOGE?</p>
             <div class="form-group">
               <div class="col-xs-12">
-                <div class="alert alert-danger" role="alert">{{error}}</div>
+                <input type='text' id="address" name='address' class="form-control input-large" required="" placeholder='Enter your Dogecoin Address' value="{{address}}" tabindex="1">
               </div>
             </div>
             <div class="clearfix"></div>
-          {% endif %}
 
-          <div id="recaptcha_area" class="form-group">
-            {{recaptcha_form|raw}}
+            {% if error %}
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <div class="alert alert-danger" role="alert">{{error}}</div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            {% endif %}
+
+            <div id="recaptcha_area" class="form-group">
+              {{recaptcha_form|raw}}
+            </div>
+            <div class="clearfix"></div>
           </div>
-          <div class="clearfix"></div>
-        </div>
-      {% endif %}
-    <div class='well'>
-      <center>
+        {% endif %}
+      <div class='well'>
+        <center>
         <div>
-          <iframe scrolling="no" frameborder="0" src="//adbit.co/adspace.php?a=2KX6N0W1ZO359" style="overflow:hidden;width:468px;height:60px;"></iframe>
+            <iframe scrolling="no" frameborder="0" src="//adbit.co/adspace.php?a=IL8R83YV86Y97" style="overflow:hidden;width:468px;height:60px;"></iframe>
         </div>
-      </center>
-    </div>
+        </center>
+      </div>
 
-    <div>
-      <ul>
-        <li><i class='glyphicon glyphicon-hand-right'></i> Earn <strong>{{ payoutRange.min }}</strong> to <strong>{{ payoutRange.max }}</strong> DOGE per dispense!</li>
-        <li><i class='glyphicon glyphicon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency|humanizeDuration('minutes') }}</strong>!</li>
-        <li><i class='glyphicon glyphicon-ok'></i> No work needed - just click!</li>
-        <li><i class='glyphicon glyphicon-time'></i> Payouts processed every <strong>{{ settings.payout.dispenseFrequency|humanizeDuration('minutes') }}</strong>.</li>
-        <li><i class='glyphicon glyphicon-bell'></i> Minimum for payout is only <strong>{{ settings.payout.minCashout }}<strong> DOGE.</li>
-      </ul>
-    </div>
+      <div>
+        <ul>
+          <li><i class='glyphicon glyphicon-hand-right'></i> Earn <strong>{{ payoutRange.min }}</strong> to <strong>{{ payoutRange.max }}</strong> DOGE per dispense!</li>
+          <li><i class='glyphicon glyphicon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency|humanizeDuration('minutes') }}</strong>!</li>
+          <li><i class='glyphicon glyphicon-ok'></i> No work needed - just click!</li>
+          <li><i class='glyphicon glyphicon-time'></i> Payouts processed every <strong>{{ settings.payout.dispenseFrequency|humanizeDuration('minutes') }}</strong>.</li>
+          <li><i class='glyphicon glyphicon-bell'></i> Minimum for payout is only <strong>{{ settings.payout.minCashout }}<strong> DOGE.</li>
+        </ul>
+      </div>
 
-    <div class="form-group">
-      <input type='submit' class='btn btn-primary btn-block' value='Collect DOGE'>
-    </div>
-  </form>
+      <div class="form-group">
+        <input type='submit' class='btn btn-primary btn-block' value='Collect DOGE'>
+      </div>
+    </form>
 
-  <center>
-    <div>
-        <iframe scrolling="no" frameborder="0" src="//adbit.co/adspace.php?a=2KX6N0W1ZO359" style="overflow:hidden;width:468px;height:60px;"></iframe>
-    </div>
-    <div>
-        <a href="//adbit.co/?a=Advertise&b=View_Bid&c=2KX6N0W1ZO359" target="_blank">&#8657; Your Ad Here &#8657;</a>
-    </div>
-  </center>
+    <center>
+      <div>
+          <iframe scrolling="no" frameborder="0" src="//adbit.co/adspace.php?a=2KX6N0W1ZO359" style="overflow:hidden;width:468px;height:60px;"></iframe>
+      </div>
+      <div>
+          <a href="//adbit.co/?a=Advertise&b=View_Bid&c=2KX6N0W1ZO359" target="_blank">&#8657; Your Ad Here &#8657;</a>
+      </div>
+    </center>
 
-  <p>
-    <strong><a href="http://bleutrade.com">Bleutrade</a>
-    </strong>- The secure, fast and reliable cryptocurrency exchange
-  </p>
+    <p>
+      <strong><a href="http://bleutrade.com">Bleutrade</a>
+      </strong>- The secure, fast and reliable cryptocurrency exchange
+    </p>
+  </div>
+  
+  <div class='col-md-3'>
+    {% block right %}
+      {% include "partials/_right.html" %}
+    {% endblock %}
+  </div>
 </div>
 {% endblock %}
 

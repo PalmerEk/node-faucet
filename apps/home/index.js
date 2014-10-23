@@ -16,11 +16,13 @@ app.set('views', __dirname);
 app.get('/', captureReferrer, showFaucet);
 app.post('/', validateCaptcha, validateAddress, validateFrequency, dispense, showFaucet);
 
-function captureReferrer(req, res, next) {
-	var day = (24*60*60*1000);
+var day = (24*60*60*1000);
+var cookieLife = {maxAge: (day*360), expires: new Date(Date.now() + (day*360))};
 
-    if(req.query.r && settings.payout.referralPct > 0) req.cookies.set('referrer', req.query.r, {maxAge: (day*360), expires: new Date(Date.now() + (day*360))});
-    next();
+function captureReferrer(req, res, next) {
+	// If we were referred and we don't already have a referrer, set it. 
+  if(req.query.r && settings.payout.referralPct > 0 && _.isUndefined(req.cookies.get('referrer'))) req.cookies.set('referrer', req.query.r, cookieLife);
+  next();
 }
 
 function showFaucet(req, res, next) {
@@ -53,7 +55,11 @@ function validateAddress(req, res, next) {
 		res.locals.address = req.body.address;
 
 		res.locals.referralURL = util.format('%s?r=%s', settings.site.url, req.body.address);
-		if(!isValid) res.locals.error = "Invalid Dogecoin Address"
+		if(isValid) {
+			req.cookies.set('lastAddress', req.body.address, cookieLife);
+		} else {
+			res.locals.error = "Invalid Dogecoin Address";
+		}
 		next();
 	})
 }
