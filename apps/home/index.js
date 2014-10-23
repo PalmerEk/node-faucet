@@ -60,7 +60,7 @@ function validateAddress(req, res, next) {
 
 function validateFrequency(req, res, next) {
 	db.getTimeUntilNextDispence(req.body.address, req.connection.remoteAddress, function(err, row, fields) {
-		if(row) res.locals.error = "Too Soon!  Come back in " + rows.remainingTime;
+		if(row) res.locals.error = "Too Soon!  Come back in " + row.remainingTime;
 		next();
 	});
 }
