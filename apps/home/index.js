@@ -13,6 +13,9 @@ var Recaptcha = require('recaptcha').Recaptcha;
 
 app.set('views', __dirname);
 
+app.get('/faq', captureReferrer, showFAQ);
+app.get('/refer', captureReferrer, showRefer);
+
 app.get('/', captureReferrer, showFaucet);
 app.post('/', validateCaptcha, validateAddress, validateFrequency, dispense, showFaucet);
 
@@ -30,6 +33,24 @@ function showFaucet(req, res, next) {
 
 	res.render("index", {
 		recaptcha_form: recaptcha.toHTML()
+	});
+}
+
+function showFAQ(req, res, next) {
+	var recaptcha = new Recaptcha(settings.recaptcha.key, settings.recaptcha.secret);
+
+	res.render("faq", {
+		tab: 'FAQ'
+	});
+}
+
+function showRefer(req, res, next) {
+	var recaptcha = new Recaptcha(settings.recaptcha.key, settings.recaptcha.secret);
+
+	res.render("refer", {
+		tab: 'Refer',
+		referralURL: util.format('%s?r=', settings.site.url),
+		address: _.isUndefined(req.cookies.get('lastAddress')) ? '' : req.cookies.get('lastAddress')
 	});
 }
 

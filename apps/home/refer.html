@@ -1,0 +1,25 @@
+{% extends '../views/layout.html' %}
+
+{% block meta %}
+	{% parent %}
+{% endblock %}
+
+{% block body %}
+<div class='row-fluid'>
+  <div class='col-md-12'>
+    <div>We offer a {{settings.payout.referralPct}}% lifetime commision on all referrals!</div></br>
+    <div>Your referral address: <a href="{{referralURL}}">{{referralURL}}{{address|default('{Your Dogecoin Address}')}}</a></div></br>
+    
+    <h2>Banners</h2>
+    <div class="thumbnail">
+      <img src="https://s3.amazonaws.com/images.bloquechain.com/DogeBloqueChain.jpg" alt="Doge.BloqueChain.com Banner">
+      <div class="caption">
+        <input type="text" class="form-control input-large" value="https://s3.amazonaws.com/images.bloquechain.com/DogeBloqueChain.jpg" readonly />
+      </div>
+    </div>
+
+  </div>  
+</div>  
+{% endblock %}
+
+
