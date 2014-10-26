@@ -18,7 +18,7 @@ app.set('views', __dirname);
 app.get('/faq', captureReferrer, showFAQ);
 app.get('/refer', captureReferrer, showRefer);
 
-app.get('/', captureReferrer, showFaucet);
+app.get('/', captureReferrer, validateFrequency, showFaucet);
 app.post('/', validateCaptcha, validateAddress, validateFrequency, dispense, showFaucet);
 
 var day = (24*60*60*1000);
@@ -97,7 +97,10 @@ function validateAddress(req, res, next) {
 
 function validateFrequency(req, res, next) {
 	db.getTimeUntilNextDispence(res.locals.address, res.locals.ip, function(err, row, fields) {
-		if(row) res.locals.error = "Too Soon!  Come back in " + row.remainingTime;
+		if(row) {
+			res.locals.error = "Too Soon!  Come back in " + row.remainingTime;
+			res.locals.nextDispense = row.nextDispense;
+		}
 		next();
 	});
 }

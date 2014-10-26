@@ -11,6 +11,41 @@
     <div class="jumbotron">
       <p>We offer a <strong>{{settings.payout.referralPct}}% lifetime</strong> commision on all referrals!</p>
       <p>Your referral address: <a href="{{referralURL}}{{address|default('{Your Dogecoin Address}')}}">{{referralURL}}{{address|default('{Your Dogecoin Address}')}}</a></p>
+
+      {# Twitter #}
+      <a class="twitter-share-button" href="https://twitter.com/share"
+          data-related="twitterdev"
+          data-size="large"
+          data-count="none"
+          data-text="Free Dogecoins Hourly, Payouts Daily!"
+          data-url="{{referralURL}}{{address|default('{Your Dogecoin Address}')}}"
+          data-hastags="#dogecoin">
+        Tweet
+      </a>
+      <script type="text/javascript">
+      window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+      </script>
+
+      {# Google+ #}
+      <div class="g-plus" data-action="share" data-annotation="none" data-height="24" data-href="{{referralURL}}{{address|default('{Your Dogecoin Address}')}}"></div>
+      <script type="text/javascript">
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/platform.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+      </script>
+
+      {# Facebook #}
+      <div class="fb-share-button" data-href="{{referralURL}}{{address|default('{Your Dogecoin Address}')}}" data-layout="button"></div>
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=165474316865753&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
     </div>
 
     <h2>Banners</h2>
@@ -19,7 +54,7 @@
       <img src="http://images.bloquechain.com/DogeBloqueChain_728x90.jpg" alt="Doge.BloqueChain.com 728x90 Banner">
       <div class="caption">
         Image: <pre>http://images.bloquechain.com/DogeBloqueChain_728x90.jpg</pre>
-        Link: <pre>&lt;a href=&quot;{{referralURL}}{{address|default('{Your Dogecoin Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_728x90.jpg&quot;/&gt;&lt;/a&gt;</pre>
+        HTML: <pre>&lt;center&gt;&lt;a href=&quot;{{referralURL}}{{address|default('{Your Dogecoin Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_728x90.jpg&quot;/&gt;&lt;/a&gt;&lt;/center&gt;</pre>
       </div>
     </div>
 
@@ -28,10 +63,17 @@
       <img src="http://images.bloquechain.com/DogeBloqueChain_468x60.jpg" alt="Doge.BloqueChain.com 468x60 Banner">
       <div class="caption">
         Image: <pre>http://images.bloquechain.com/DogeBloqueChain_468x60.jpg</pre>
-        Link: <pre>&lt;a href=&quot;{{referralURL}}{{address|default('{Your Dogecoin Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_468x60.jpg&quot;/&gt;&lt;/a&gt;</pre>
+        HTML: <pre>&lt;center&gt;&lt;a href=&quot;{{referralURL}}{{address|default('{Your Dogecoin Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_468x60.jpg&quot;/&gt;&lt;/a&gt;&lt;/center&gt;</pre>
       </div>
     </div>
 
+    <h2>Signatures</h2>
+    <div class="thumbnail">
+      <h2>Forum</h2>
+      <div class="caption">
+        <pre>[center][url={{referralURL}}{{address|default('{Your Dogecoin Address}')}}][b][size=15pt][color=red]Free Dogecoins Hourly! - [/color][color=green]doge.bloquechain.com[/color][/size][/b][/url][/center]</pre>
+      </div>
+    </div>
   </div>  
 </div>  
 {% endblock %}

@@ -4,6 +4,12 @@
 	{% parent %}
 {% endblock %}
 
+{% block css %}
+  {% parent %}
+  {# <link rel="stylesheet" href="/css/jquery.countdown.css"> #}
+{% endblock %}
+
+
 {% block body %}
 <div class='row-fluid'>
   <div class='col-md-12'>
@@ -68,7 +74,12 @@
             {% if error %}
               <div class="form-group">
                 <div class="col-xs-12">
-                  <div class="alert alert-danger" role="alert">{{error}}</div>
+                  {% if nextDispense %}
+                    <div id="countdown"></div>
+                    <div class="alert alert-danger" role="alert">{{error}}</div>
+                  {% else %}
+                    <div class="alert alert-danger" role="alert">{{error}}</div>
+                  {% endif %}
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -102,7 +113,7 @@
           <li><i class='glyphicon glyphicon-time'></i> Get a dispense every <strong>{{ settings.payout.frequency|humanizeDuration('minutes') }}</strong>!</li>
           <li><i class='glyphicon glyphicon-ok'></i> No work needed - just click!</li>
           <li><i class='glyphicon glyphicon-time'></i> Payouts processed every <strong>{{ settings.payout.dispenseFrequency|humanizeDuration('minutes') }}</strong>.</li>
-          <li><i class='glyphicon glyphicon-bell'></i> Minimum for payout is only <strong>{{ settings.payout.minCashout }}<strong> DOGE.</li>
+          <li><i class='glyphicon glyphicon-bell'></i> Minimum for payout is only <strong>{{ settings.payout.minCashout }}</strong> DOGE.</li>
         </ul>
       </div>
 
@@ -121,8 +132,7 @@
     </center>
 
     <p>
-      <strong><a href="http://bleutrade.com/home/4583">Bleutrade</a>
-      </strong>- The secure, fast and reliable cryptocurrency exchange
+      <strong><a href="http://bleutrade.com/home/4583">Bleutrade</a></strong>- The secure, fast and reliable cryptocurrency exchange
     </p>
   </div>
   
@@ -135,3 +145,19 @@
 {% endblock %}
 
 
+﻿
+
+
+{% block script %}
+  {% parent %}
+  {% if nextDispense %}
+  {#
+    <script href="/js/jquery.countdown.min.js"></script>
+    <script>
+      $(function() {
+        //new Date('{{nextDispense|date('r')}}')
+      });
+    </script>
+  #}
+  {% endif %}
+{% endblock %}
