@@ -42,6 +42,7 @@ function showFaucet(req, res, next) {
 	var recaptcha = new Recaptcha(settings.recaptcha.key, settings.recaptcha.secret);
 
 	res.render("index", {
+		tab: 'Faucet',
 		recaptcha_form: recaptcha.toHTML()
 	});
 }
