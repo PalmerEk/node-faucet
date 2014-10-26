@@ -31,7 +31,7 @@ app.set('view engine', 'html');
 app.set('port', process.env.PORT || settings.port);
 app.set('views', VIEWS_DIR);
 
-app.use(require('serve-favicon')(path.join(__dirname, 'public/favicon.ico')));
+app.use(require('serve-favicon')(path.join(__dirname, 'public/img/favicon.ico')));
 app.use(require('body-parser')());;
 app.use(require('method-override')());
 app.use(Cookies.express(settings.session.key));
