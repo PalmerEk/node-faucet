@@ -9,20 +9,33 @@ var db = require('../../lib/db');
 var coinRPC = require('../../lib/coinRPC');
 
 var _ = require('underscore');
+_.s = require('underscore.string');
+_.mixin(_.s.exports());
 var Recaptcha = require('recaptcha').Recaptcha;
 
 app.set('views', __dirname);
 
-app.get('/', captureReferrer, showFaucet);
+app.get('/faq', captureReferrer, showFAQ);
+app.get('/refer', captureReferrer, showRefer);
+
+app.get('/', captureReferrer, validateFrequency, showFaucet);
 app.post('/', validateCaptcha, validateAddress, validateFrequency, dispense, showFaucet);
 
 var day = (24*60*60*1000);
 var cookieLife = {maxAge: (day*360), expires: new Date(Date.now() + (day*360))};
 
 function captureReferrer(req, res, next) {
-	// If we were referred and we don't already have a referrer, set it. 
-  if(req.query.r && settings.payout.referralPct > 0 && _.isUndefined(req.cookies.get('referrer'))) req.cookies.set('referrer', req.query.r, cookieLife);
-  next();
+  // If we were referred and we don't already have a referrer, set it. 
+  if(req.query.r && settings.payout.referralPct > 0 && _.isUndefined(req.cookies.get('referrer'))) {
+  	var referrer = _.s.trim(req.query.r);
+
+  	coinRPC.validateAddress(referrer, function(err, isValid) {
+		if(isValid) req.cookies.set('referrer', referrer, cookieLife);
+		next();
+	})
+  } else {
+  	next();
+  }
 }
 
 function showFaucet(req, res, next) {
@@ -30,6 +43,24 @@ function showFaucet(req, res, next) {
 
 	res.render("index", {
 		recaptcha_form: recaptcha.toHTML()
+	});
+}
+
+function showFAQ(req, res, next) {
+	var recaptcha = new Recaptcha(settings.recaptcha.key, settings.recaptcha.secret);
+
+	res.render("faq", {
+		tab: 'FAQ'
+	});
+}
+
+function showRefer(req, res, next) {
+	var recaptcha = new Recaptcha(settings.recaptcha.key, settings.recaptcha.secret);
+
+	res.render("refer", {
+		tab: 'Refer',
+		referralURL: util.format('%s?r=', settings.site.url),
+		address: _.isUndefined(req.cookies.get('lastAddress')) ? '' : req.cookies.get('lastAddress')
 	});
 }
 
@@ -50,13 +81,13 @@ function validateCaptcha(req, res, next) {
 }
 
 function validateAddress(req, res, next) {
-	coinRPC.validateAddress(req.body.address, function(err, isValid) {
+	res.locals.address = _.s.trim(req.body.address);
+	coinRPC.validateAddress(res.locals.address, function(err, isValid) {
 		res.addressValid = isValid;
-		res.locals.address = req.body.address;
 
-		res.locals.referralURL = util.format('%s?r=%s', settings.site.url, req.body.address);
+		res.locals.referralURL = util.format('%s?r=%s', settings.site.url, res.locals.address);
 		if(isValid) {
-			req.cookies.set('lastAddress', req.body.address, cookieLife);
+			req.cookies.set('lastAddress', res.locals.address, cookieLife);
 		} else {
 			res.locals.error = "Invalid Dogecoin Address";
 		}
@@ -65,8 +96,11 @@ function validateAddress(req, res, next) {
 }
 
 function validateFrequency(req, res, next) {
-	db.getTimeUntilNextDispence(req.body.address, res.locals.ip, function(err, row, fields) {
-		if(row) res.locals.error = "Too Soon!  Come back in " + row.remainingTime;
+	db.getTimeUntilNextDispence(res.locals.address, res.locals.ip, function(err, row, fields) {
+		if(row) {
+			res.locals.error = "Too Soon!  Come back in " + row.remainingTime;
+			res.locals.nextDispense = row.nextDispense;
+		}
 		next();
 	});
 }
@@ -86,11 +120,11 @@ function dispense(req, res, next) {
 		}
 	}
 
-	db.dispense(req.body.address, res.locals.ip, res.locals.dispenseAmt, req.cookies.get('referrer'), function(err, success) {
+	db.dispense(res.locals.address, res.locals.ip, res.locals.dispenseAmt, req.cookies.get('referrer'), function(err, success) {
 		res.locals.success = success;
 
 		if(success) {
-			db.getUserBalance(req.body.address, function(err, balance) {
+			db.getUserBalance(res.locals.address, function(err, balance) {
 				res.locals.userBalance = balance;
 				next();
 			});

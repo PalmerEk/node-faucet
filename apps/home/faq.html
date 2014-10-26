@@ -1,0 +1,64 @@
+{% extends '../views/layout.html' %}
+
+{% block meta %}
+	{% parent %}
+{% endblock %}
+
+{% block body %}
+<div class='row-fluid'>
+  <div class='col-md-12'>
+
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+           		What is Dogecoin?
+         	</a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <p>
+              Dogecoin is a decentralized, peer-to-peer digital currency that enables you to easily send money online. Think of it as "the internet currency."
+            </p>
+
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="//www.youtube.com/embed/_KVZmS_UO5I" allowfullscreen></iframe>
+            </div>
+
+            <p>
+            	<a target="_blank" href="http://dogecoin.com/">Know Your Coin: Would You Like to Know More?</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+           		What's up with the dog?
+         	</a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p>
+              The dog's name is Kabosu and belongs to japanese kindergarten teacher Atsuko Sato. Atsuko Sato posted several photos of the Shiba Inu on her personal blog. Included in the photos was a shot of Kabosu casting a sideways glare at the camera. The gave way to the DOGE meme and subsequently become a sort of mascot for the Dogecoin currency
+            </p>
+            <img src="http://i0.kym-cdn.com/photos/images/original/000/581/296/c09.jpg" alt="Doge Kabosu" width="100%" />
+
+            <p>
+            	<a target="_blank" href="http://knowyourmeme.com/memes/doge">Know Your Dog: Would You Like to Know More?</a>
+            </p>
+          </div>
+        </div>
+      </div>
+	</div>
+	
+  </div>
+</div>  
+{% endblock %}
+
+
