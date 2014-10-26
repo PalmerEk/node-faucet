@@ -16,6 +16,7 @@ var coinRPC = require('./lib/coinRPC');
 			db.getReferrers(settings.payout.referralPct, lastPayTime, function(err, referrers) {
 
 				coinRPC.sendPayments(payees, 'Thanks for using ' + settings.site.name, function(err, txid) {
+if(err) console.error('Error sending payments: ' + err);
 					db.logPayments(txid, lastPayTime, function(err) {
 						console.log('Paid out: ' + util.inspect(payees, false, 5, true))
 						console.log('txid: ' + txid)
