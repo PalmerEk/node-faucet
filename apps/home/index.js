@@ -111,11 +111,16 @@ function dispense(req, res, next) {
 	var bracketOdds = 0;
 	res.locals.dispenseAmt = settings.payout.bracket[0].amt;
 	res.locals.luckyNumber = Math.random() * 100;
+	var payoutModifier = 1;
+
+	if(settings.payout.adblockPenalty && settings.payout.adblockPenalty > 0) {
+		if(req.body.adblockdetection === "0") payoutModifier = ((100-settings.payout.adblockPenalty)/100);
+	}
 
 	for(x = 0; x < settings.payout.bracket.length; x++) {
 		bracketOdds += settings.payout.bracket[x].odds
 		if(res.locals.luckyNumber < bracketOdds) {
-			res.locals.dispenseAmt = settings.payout.bracket[x].amt;
+			res.locals.dispenseAmt = (settings.payout.bracket[x].amt * payoutModifier);
 			break;
 		}
 	}

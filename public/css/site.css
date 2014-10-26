@@ -18,6 +18,10 @@ li {
 #recaptcha_area {
   margin: 0 auto;
 }
+/* Ad Block Buster */
+#tester {
+  display: none;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 footer {
