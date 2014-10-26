@@ -7,14 +7,28 @@
 {% block body %}
 <div class='row-fluid'>
   <div class='col-md-12'>
-    <div>We offer a {{settings.payout.referralPct}}% lifetime commision on all referrals!</div></br>
-    <div>Your referral address: <a href="{{referralURL}}">{{referralURL}}{{address|default('{Your Dogecoin Address}')}}</a></div></br>
-    
+    <h1>Refer & Earn!</h1>
+    <div class="jumbotron">
+      <p>We offer a <strong>{{settings.payout.referralPct}}% lifetime</strong> commision on all referrals!</p>
+      <p>Your referral address: <a href="{{referralURL}}{{address|default('{Your Dogecoin Address}')}}">{{referralURL}}{{address|default('{Your Dogecoin Address}')}}</a></p>
+    </div>
+
     <h2>Banners</h2>
     <div class="thumbnail">
-      <img src="https://s3.amazonaws.com/images.bloquechain.com/DogeBloqueChain.jpg" alt="Doge.BloqueChain.com Banner">
+      <h2>728x90</h2>
+      <img src="http://images.bloquechain.com/DogeBloqueChain_728x90.jpg" alt="Doge.BloqueChain.com 728x90 Banner">
       <div class="caption">
-        <input type="text" class="form-control input-large" value="https://s3.amazonaws.com/images.bloquechain.com/DogeBloqueChain.jpg" readonly />
+        Image: <pre>http://images.bloquechain.com/DogeBloqueChain_728x90.jpg</pre>
+        Link: <pre>&lt;a href=&quot;{{referralURL}}{{address|default('{Your Dogecoin Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_728x90.jpg&quot;/&gt;&lt;/a&gt;</pre>
+      </div>
+    </div>
+
+    <div class="thumbnail">
+      <h2>468x60</h2>
+      <img src="http://images.bloquechain.com/DogeBloqueChain_468x60.jpg" alt="Doge.BloqueChain.com 468x60 Banner">
+      <div class="caption">
+        Image: <pre>http://images.bloquechain.com/DogeBloqueChain_468x60.jpg</pre>
+        Link: <pre>&lt;a href=&quot;{{referralURL}}{{address|default('{Your Dogecoin Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_468x60.jpg&quot;/&gt;&lt;/a&gt;</pre>
       </div>
     </div>
 
