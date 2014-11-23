@@ -1,8 +1,9 @@
-var express = require('express');
-var app = module.exports = express();
-var util = require("util");
-var url = require('url');
+var path = require('path')
+	,	express = require('express')
+	, util = require("util")
+	, url = require('url');
 
+var app = module.exports = express();
 var settings = require(process.env.settingsFile || '../../settings')
 
 var db = require('../../lib/db');
@@ -13,7 +14,8 @@ _.s = require('underscore.string');
 _.mixin(_.s.exports());
 var Recaptcha = require('recaptcha').Recaptcha;
 
-app.set('views', __dirname);
+var VIEWS_DIR = path.join(process.cwd(), 'themes', settings.theme.name || 'default', __dirname.split(path.sep)[__dirname.split(path.sep).length - 1]);
+app.set('views', VIEWS_DIR);
 
 app.get('/faq', captureReferrer, showFAQ);
 app.get('/refer', captureReferrer, showRefer);

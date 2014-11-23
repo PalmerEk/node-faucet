@@ -12,13 +12,14 @@ var env = process.env.NODE_ENV || 'development';
 var app = module.exports = express();
 
 // setup SWIG
-var VIEWS_DIR = path.join(__dirname, 'apps/views');
+app.set('appFolder', __dirname);
+var VIEWS_DIR = path.join(__dirname, 'themes', settings.theme.name || 'default');
+
 app.engine('html', swig.renderFile);
 require('./lib/filters')(swig);
 
 if(env == 'development'){
   swig.setDefaults({root: VIEWS_DIR, allowErrors: true, cache: false});
-  //, filters: require('./lib/filters')
   app.use(require('morgan')({ format: 'dev', immediate: true }));
 } else {
   swig.setDefaults({root: VIEWS_DIR, allowErrors: false, cache: "memory"});
@@ -35,8 +36,10 @@ app.use(require('serve-favicon')(path.join(__dirname, 'public/img/favicon.ico'))
 app.use(require('body-parser')());;
 app.use(require('method-override')());
 app.use(Cookies.express(settings.session.key));
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+// theme specific comes first
+app.use(require('serve-static')(path.join(__dirname, 'themes', settings.theme.name || 'default', 'public')));
 app.use(require('serve-static')(path.join(__dirname, 'public')));
+
 
 if(env = 'development'){
   app.use(require('errorhandler')({ dumpExceptions: true, showStack: true }));

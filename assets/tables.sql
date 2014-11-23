@@ -13,8 +13,6 @@ CREATE TABLE IF NOT EXISTS transactions (
     amount REAL NOT NULL,
     referrer VARCHAR(34) NULL,
     txid VARCHAR(64) NULL,
+    referral_txid VARCHAR(64) NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-ALTER TABLE transactions drop dispensed;
-ALTER TABLE transactions ADD txid VARCHAR(64) NULL;

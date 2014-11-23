@@ -1,10 +1,13 @@
-var express = require('express');
+var path = require('path')
+	,	express = require('express')
+	, util = require('util');
+
 var app = module.exports = express();
+var settings = require(process.env.settingsFile || '../../settings')
 
-app.set('views', __dirname);
-
-var util = require('util');
 var log = require('../../lib/logger');
+
+app.set('views', path.join(process.cwd(), 'themes', settings.theme.name || 'default', __dirname.split(path.sep)[__dirname.split(path.sep).length - 1] ));
 
 //////////////////////////////////////////////////////////////////////////
 // Error (Response) Handling
