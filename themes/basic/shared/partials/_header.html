@@ -1,0 +1,31 @@
+<header>
+	<div class='navbar navbar-default navbar-static-top' role='navigation'>
+		<div class="container">
+			<div class='row-fluid'>
+				<div class='span12 header'>
+					<h2>{{settings.site.name}}</h2>
+					<p>{{settings.site.subtitle}}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class='row-fluid'>
+				<nav id="main_menu">
+					<ul class="nav nav-pills nav-justified">
+						<li {% if tab=='Faucet' %}class='active'{% endif %}><a href="/">Faucet</a></li>
+						{% if settings.payout.referralPct > 0 %}
+						<li {% if tab=='Refer' %}class='active'{% endif %}><a href="refer">Refer<i></i></a></li>
+						{% endif %}
+						<li {% if tab=='FAQ' %}class='active'{% endif %}><a href="faq">FAQ<i></i></a></li>
+
+						{#
+						<li><a href="yourStats">Your Stats<i></i></a></li>
+						<li><a href="faucetStats">Faucet Stats<i></i></a></li>
+						#}
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</header>
