@@ -1,6 +1,8 @@
   <h4>Earn More {{settings.site.coin.shortName}}</h4>
   <p>
-  	<a href='http://freedoge.co.in/?r=120363' target='_blank'>FreeDoge.co.in</a><br />
+    {% for faucet in settings.ads.faucets %}
+      <a href='{{faucet.url}}' target='_blank'>{{faucet.name}}</a><br />
+    {% endfor %}
   </p>
 
   <center>
@@ -8,8 +10,8 @@
       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <ins class="adsbygoogle"
 	   style="display:inline-block;width:300px;height:600px"
-	   data-ad-client="ca-pub-1458059981031929"
-	   data-ad-slot="1479300896"></ins>
+	   data-ad-client="{{ settings.ads.google.publisher }}"
+    data-ad-slot="{{ settings.ads.google.slots[2] }}"></ins>
       <script>
 	(adsbygoogle = window.adsbygoogle || []).push({});
       </script>
@@ -18,10 +20,11 @@
 
   <h4>Buy & Sell {{settings.site.coin.shortName}}</h4>
   <p>
-  	<a href='https://www.cryptsy.com/users/register?refid=1328' target='_blank'>Cryptsy</a><br />
-  	<a href='http://bleutrade.com/home/4583' target='_blank'>Bleutrade</a><br />
+    {% for affiliate in settings.ads.affiliates %}
+      <a href='{{affiliate.url}}' target='_blank'>{{affiliate.name}}</a><br />
+    {% endfor %}
   </p>
   
   <center>
-    <iframe src="http://rcm-na.amazon-adsystem.com/e/cm?t=bloquechain-20&o=1&p=12&l=ur1&category=amazon_student&banner=11JR04FNKYYANW06VJ82&f=ifr&lc=pf4&linkID=YFPRF2HLE4D7PCL2" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+    <iframe src="{{ settings.ads.amazon.slots[2] }}" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
   </center>

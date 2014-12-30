@@ -18,8 +18,8 @@
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <ins class="adsbygoogle"
          style="display:inline-block;width:970px;height:90px"
-         data-ad-client="ca-pub-1458059981031929"
-         data-ad-slot="3987272091"></ins>
+         data-ad-client="{{ settings.ads.google.publisher }}"
+         data-ad-slot="{{ settings.ads.google.slots[0] }}"></ins>
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
@@ -27,6 +27,8 @@
     </center>
   </div>  
 </div>  
+
+
 
 <div class='row-fluid'>
   <div class='col-md-3'>
@@ -37,8 +39,7 @@
 
   <div class='col-md-6'>
     <p>
-      <strong><a href="http://bleutrade.com/home/4583">Bleutrade</a>
-      </strong>- The secure, fast and reliable cryptocurrency exchange
+      <strong><a href='{{settings.ads.affiliates[0].url}}' target='_blank'>{{settings.ads.affiliates[0].name}}</a></strong>{{settings.ads.affiliates[0].description}}
     </p>
 
     <h3>Get free {{settings.site.coin.name}} from {{ settings.site.name }}!</h3>
@@ -111,17 +112,11 @@
         {% endif %}
       <div class='well'>
         <center>
-          <div>
-            <a href="http://freedoge.co.in/?r=120363" target="_blank"><img src="http://static1.freedoge.co.in/banners/468x60-2.png" border="0"/></a>
-          </div>
-
-          <div>
-            <a href="http://freebitco.in/?r=897775" target="_blank"><img src="http://static1.freebitco.in/banners/468x60-3.png" border="0"/></a>
-          </div>
-
-          <div>
-            <a href="http://www.dogefaucet.co/?r=DJMzRrHg37uanW4mzgRdGJd3LA2QtZ25rf" target="_blank"><img src="http://www.dogefaucet.co/images/refer/468x60.png" border="0"/></a>
-          </div>
+          {% for banner in settings.ads.banners %}
+            <div>
+              <a href="{{banner.url}}" target="_blank"><img src="{{banner.img}}" border="0"/></a>
+            </div>
+          {% endfor %}
         </center>
       </div>
 
@@ -142,12 +137,12 @@
 
     <div class="ad">
     <center>
-      <iframe src="http://rcm-na.amazon-adsystem.com/e/cm?t=bloquechain-20&o=1&p=13&l=ez&f=ifr&f=ifr&linkID=5U26YKIBFYI74AQO" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" border="0" frameborder="0" style="border:none;"></iframe>
+      <iframe src="{{ settings.ads.amazon.slots[0] }}" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" border="0" frameborder="0" style="border:none;"></iframe>
     </center>
     </div>
 
     <p>
-      <strong><a href="http://bleutrade.com/home/4583">Bleutrade</a></strong>- The secure, fast and reliable cryptocurrency exchange
+      <strong><a href='{{settings.ads.affiliates[0].url}}' target='_blank'>{{settings.ads.affiliates[0].name}}</a></strong>{{settings.ads.affiliates[0].description}}
     </p>
   </div>
   

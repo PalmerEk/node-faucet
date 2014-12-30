@@ -1,5 +1,18 @@
 {
     "port": 3000,
+    "rpcClient": "node-dogecoin",
+
+    "site": {
+        "name": "Unlimited DOGE Empire",
+        "subtitle": "Better. Doge. Now.",
+        "url": "http://dogefaucet.palmerek.com",
+        "domain": "dogefaucet.palmerek.com",
+        "coin": {
+          "shortName": "DOGE",
+          "name": "Dogecoin"
+        },
+        "donations": "DJ9pzzygnHwtV42oMdgGLEAGYbiBgxZQaB"
+    },
 
     "rpc": {
         "host": "localhost",
@@ -28,17 +41,60 @@
     },
 
     "payout": {
-        "frequency": 15, 
-        "minCashout": 10,
+        "frequency": 60,
+        "minCashout": 1,
         "accumulate": true,
         "referralPct": 25,
+        "adblockPenalty": 90,
         "dispenseFrequency": 1440,
-        "bracket":
-            [{"amt": 1, "odds": 38.0},
-            {"amt": 2, "odds": 32.0},
-            {"amt": 4, "odds": 16.0},
-            {"amt": 8, "odds": 8.0},
-            {"amt": 16, "odds": 4.0},
-            {"amt": 32, "odds": 2.0}]
-    }
+        "bracket": [
+          {"amt": 1.11, "odds": 25.0},
+          {"amt": 1.45, "odds": 25.0},
+          {"amt": 2.2, "odds": 15.0},
+          {"amt": 2.9, "odds": 15.0},
+          {"amt": 3.5, "odds": 10.0},
+          {"amt": 5, "odds": 5.0},
+          {"amt": 7, "odds": 4.0},
+          {"amt": 12.5, "odds": 0.5},
+          {"amt": 38, "odds": 0.45},
+          {"amt": 65, "odds": 0.04},
+          {"amt": 1250, "odds": 0.01}
+        ]
+      },
+      "theme": {
+        "name": "basic"
+      },
+      "ads": {
+    "google": {
+        "publisher": "ca-pub-1458059981031929",
+        "slots": [
+            "3987272091",
+            "9362494492",
+            "1479300896"
+        ]
+    },
+    "amazon": {
+        "slots": [
+            "http://rcm-na.amazon-adsystem.com/e/cm?t=bloquechain-20&o=1&p=13&l=ez&f=ifr&f=ifr&linkID=5U26YKIBFYI74AQO",
+            "http://rcm-na.amazon-adsystem.com/e/cm?t=bloquechain-20&o=1&p=9&l=ez&f=ifr&f=ifr&linkID=OHY3VUAJRL74OWPN",
+            "http://rcm-na.amazon-adsystem.com/e/cm?t=bloquechain-20&o=1&p=12&l=ur1&category=amazon_student&banner=11JR04FNKYYANW06VJ82&f=ifr&lc=pf4&linkID=YFPRF2HLE4D7PCL2"
+        ]
+    },
+    "adbit": { },
+    "private": { },
+
+    "affiliates": [
+      {"url": "http://bleutrade.com/home/4583", "name": "Bleutrade", "description": "- The secure, fast and reliable cryptocurrency exchange" },
+      {"url": "https://www.cryptsy.com/users/register?refid=1328", "name": "Cryptsy", "description": "Cryptsy" }
+    ],
+    "faucets": [
+      {"url": "http://freedoge.co.in/?r=120363", "name": "FreeDoge.co.in", "description": "FreeDoge.co.in" },
+      {"url": "http://www.dogefaucet.co/?r=DJMzRrHg37uanW4mzgRdGJd3LA2QtZ25rf", "name": "DogeFaucet", "description": "DogeFaucet" }
+    ],
+    "banners": [
+      {"url": "http://freedoge.co.in/?r=120363", "img": "http://static1.freedoge.co.in/banners/468x60-2.png" },
+      {"url": "http://freebitco.in/?r=897775", "img": "http://static1.freebitco.in/banners/468x60-3.png" },
+      {"url": "http://www.dogefaucet.co/?r=DJMzRrHg37uanW4mzgRdGJd3LA2QtZ25rf", "img": "http://www.dogefaucet.co/images/refer/468x60.png" }
+    ]
+  }
 }
