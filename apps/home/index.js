@@ -85,7 +85,8 @@ function validateCaptcha(req, res, next) {
 
 function validateAddress(req, res, next) {
 	res.locals.address = _.s.trim(req.body.address);
-	coinRPC.validateAddress(res.locals.address, function(err, isValid) {
+	//coinRPC.validateAddress(res.locals.address, function(err, isValid) {
+		isValid = true;
 		res.addressValid = isValid;
 
 		res.locals.referralURL = util.format('%s?r=%s', settings.site.url, res.locals.address);
@@ -95,7 +96,7 @@ function validateAddress(req, res, next) {
 			res.locals.error = "Invalid Dogecoin Address";
 		}
 		next();
-	})
+	//})
 }
 
 function validateFrequency(req, res, next) {
@@ -128,6 +129,7 @@ function dispense(req, res, next) {
 		}
 	}
 
+	return next();
 	db.dispense(res.locals.address, res.locals.ip, res.locals.dispenseAmt, req.cookies.get('referrer'), function(err, success) {
 		res.locals.success = success;
 

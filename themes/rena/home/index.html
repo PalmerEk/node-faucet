@@ -12,14 +12,6 @@
 
 {% block body %}
 <div class='row-fluid'>
-  <div class='col-md-12'>
-    <center>
-      <h1><a style='text-decoration: none; color: black;' href='{{settings.site.url}}'>{{settings.site.name}}</a></h1>
-    </center>
-  </div>
-</div>
-
-<div class='row-fluid'>
   <div class='col-md-3'>
     {% block left %}
       {% include "partials/_left.html" %}
@@ -27,7 +19,15 @@
   </div>
 
   <div class='col-md-6'>
-    <div><center><img src="http://lorempixel.com/468/60/sports/Ad Placeholder/" /></center></div>
+    <div class="banner">
+      <center>
+        <div>
+          <iframe scrolling="no" frameborder="0" src="{{ settings.ads.adbit.slots[0] }}" style="overflow:hidden;width:468px;height:60px;"></iframe>
+        </div>
+      </center>
+    </div>
+
+
 
     <script>
      var RecaptchaOptions = {theme : 'white'};
@@ -99,7 +99,10 @@
           </div>
         {% endif %}
 
-        <div><center><img src="http://lorempixel.com/468/60/sports/Ad Placeholder/" /></center></div>
+        <div class="banner">
+          <iframe data-aa='{{ settings.ads.anonymousAds.slots[0] }}' src='//ad.a-ads.com/{{ settings.ads.anonymousAds.slots[0] }}?size=468x60' scrolling='no' style='width:468px; height:60px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
+        </div>
+
 
         <div class='well'>
           <h2>Our Rewards</h2>
@@ -117,11 +120,30 @@
           </table>
         </div>
 
-        <div><center><img src="http://lorempixel.com/468/60/sports/Ad Placeholder/" /></center></div>
-          
-        <div>FAQ?</div>
+        <div class="banner">
+          <center>
+            <div>
+              <iframe scrolling="no" frameborder="0" src="{{ settings.ads.adbit.slots[1] }}" style="overflow:hidden;width:468px;height:60px;"></iframe>
+            </div>
+          </center>
+        </div>
         
-        <div><center><img src="http://lorempixel.com/468/60/sports/Ad Placeholder/" /></center></div>
+        <div class="panel-group" id="FAQGroup">
+          <div class="panel panel-default">
+            <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#FAQGroup" href="#FAQ">  
+              <p class="panel-title">
+                <strong>FAQ</strong>
+              </p>
+            </div>
+            <div id="FAQ" class="panel-collapse collapse style="height: 0px;>
+              {% include "partials/_faq.html" %}
+            </div>
+          </div>
+        </div>
+        
+        <div class="banner">
+          <iframe data-aa='{{ settings.ads.anonymousAds.slots[1] }}' src='//ad.a-ads.com/{{ settings.ads.anonymousAds.slots[1] }}?size=468x60' scrolling='no' style='width:468px; height:60px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
+        </div>
       
     </form>
   </div>

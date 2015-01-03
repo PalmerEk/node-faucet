@@ -11,9 +11,18 @@ body {
   background-color: #b5cbd9;
   text-align: center;
 }
-ul,
-li {
+ul, li {
   list-style-type: none;
+}
+.banner {
+  margin-bottom: 20px;
+}
+.panel-heading {
+  cursor: pointer;
+}
+th {
+  text-align: center;
+  font-weight: bold;
 }
 #recaptcha_area {
   margin: 0 auto;

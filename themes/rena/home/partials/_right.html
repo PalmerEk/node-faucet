@@ -2,7 +2,7 @@
     <h3>Earn More {{settings.site.coin.shortName}}</h3>
     <p>
       {% for faucet in settings.ads.faucets %}
-        <img src='http://rena-faucet.com/_files/img/icons/DOGE.png' alt="DOGE" height='16' width='16'> <a href='{{faucet.url}}' target='_blank'>{{faucet.name}}</a><br />
+        {% if faucet.img %}<img src='{{faucet.img}}' alt="DOGE" height='16' width='16'> {% endif %} <a href='{{faucet.url}}' target='_blank'>{{faucet.name}}</a><br />
       {% endfor %}    
     </p>
   </div>
@@ -15,14 +15,16 @@
 	   data-ad-client="{{ settings.ads.google.publisher }}"
     data-ad-slot="{{ settings.ads.google.slots[2] }}"></ins>
       <script>
-	(adsbygoogle = window.adsbygoogle || []).push({});
+	     (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
   </center>
 
-  <h4>Buy & Sell {{settings.site.coin.shortName}}</h4>
-  <p>
-    {% for affiliate in settings.ads.affiliates %}
-      <a href='{{affiliate.url}}' target='_blank'>{{affiliate.name}}</a><br />
-    {% endfor %}
-  </p>
+  <div class='well'>
+    <h3>Buy & Sell {{settings.site.coin.shortName}}</h3>
+    <p>
+      {% for affiliate in settings.ads.affiliates %}
+        <a href='{{affiliate.url}}' target='_blank'>{{affiliate.name}}</a><br />
+      {% endfor %}
+    </p>
+  </div>
