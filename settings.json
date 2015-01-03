@@ -67,6 +67,15 @@
         "name": "basic"
     },
 
+    "referralBanners": {
+        "728x90": [
+          {"img": "http://images.bloquechain.com/DogeBloqueChain_728x90.jpg", "description": "Doge.BloqueChain.com 728x90 Banner" }
+        ],
+        "468x60": [
+          {"img": "http://images.bloquechain.com/DogeBloqueChain_468x60.jpg", "description": "Doge.BloqueChain.com 468x60 Banner" }
+        ]
+    },
+
     "ads": {
         "google": {
             "publisher": "ca-pub-1458059981031929",
@@ -96,15 +105,14 @@
             ]
         },
 
-        "private": { },
-
         "affiliates": [
           {"url": "http://bleutrade.com/home/4583", "name": "Bleutrade", "description": "- The secure, fast and reliable cryptocurrency exchange" },
           {"url": "https://www.cryptsy.com/users/register?refid=1328", "name": "Cryptsy", "description": "Cryptsy" }
         ],
         "faucets": [
-          {"url": "http://freedoge.co.in/?r=120363", "name": "FreeDoge.co.in", "description": "FreeDoge.co.in" },
-          {"url": "http://www.dogefaucet.co/?r=DJMzRrHg37uanW4mzgRdGJd3LA2QtZ25rf", "name": "DogeFaucet", "description": "DogeFaucet" }
+            {"url": "http://freedoge.co.in/?r=120363", "name": "FreeDoge.co.in", "description": "FreeDoge.co.in", "img": "img/DOGE.png" },
+            {"url": "http://www.dogefaucet.co/?r=DJMzRrHg37uanW4mzgRdGJd3LA2QtZ25rf", "name": "DogeFaucet", "description": "DogeFaucet", "img": "img/DOGE.png" },
+            {"url": "http://moonbit.co.in/?ref=8ff2b8da5026", "name": "moon bitcoin", "description": "moon bitcoin", "img": "img/BTC.png" }
         ],
         "banners": [
           {"url": "http://freedoge.co.in/?r=120363", "img": "http://static1.freedoge.co.in/banners/468x60-2.png" },

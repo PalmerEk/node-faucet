@@ -1,13 +1,15 @@
+  {% if settings.ads.faucets[settings.site.coin.shortName] %}
   <div class='well'>
-    <h3>Earn More {{settings.site.coin.shortName}}</h3>
+    <h3>Earn More {{settings.site.coin.shortName}}<br/><img src='/img/{{settings.site.coin.shortName}}.png' height='32' width='32'></h3>
     <p>
-      {% for faucet in settings.ads.faucets %}
-        {% if faucet.img %}<img src='{{faucet.img}}' alt="DOGE" height='16' width='16'> {% endif %} <a href='{{faucet.url}}' target='_blank'>{{faucet.name}}</a><br />
+      {% for faucet in settings.ads.faucets[settings.site.coin.shortName] %}
+        <a href='{{faucet.url}}' target='_blank'>{{faucet.name}}</a><br />
       {% endfor %}    
     </p>
   </div>
+  {% endif %}
 
-  <center>
+  <center class="banner">
     <div>
       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <ins class="adsbygoogle"
@@ -20,11 +22,17 @@
     </div>
   </center>
 
-  <div class='well'>
-    <h3>Buy & Sell {{settings.site.coin.shortName}}</h3>
-    <p>
-      {% for affiliate in settings.ads.affiliates %}
-        <a href='{{affiliate.url}}' target='_blank'>{{affiliate.name}}</a><br />
-      {% endfor %}
-    </p>
-  </div>
+  {% if settings.ads.faucets %}
+    {% for coin in settings.ads.faucets %}
+      {% if loop.key != settings.site.coin.shortName %}
+      <div class='well'>
+        <h3>{{loop.key}} Faucets<br/><img src='/img/{{loop.key}}.png' height='32' width='32'></h3>
+        <p>
+          {% for faucet in coin %}
+            <a href='{{faucet.url}}' target='_blank'>{{faucet.name}}</a><br />
+          {% endfor %}    
+        </p>
+      </div>
+      {% endif %}    
+    {% endfor %}
+  {% endif %}

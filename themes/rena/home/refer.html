@@ -48,24 +48,22 @@
       }(document, 'script', 'facebook-jssdk'));</script>
     </div>
 
+    <h1>{{settings.referralBanners._keys}}</h1?
+    {% if settings.referralBanners %}
     <h2>Banners</h2>
-    <div class="thumbnail">
-      <h2>728x90</h2>
-      <img src="http://images.bloquechain.com/DogeBloqueChain_728x90.jpg" alt="Doge.BloqueChain.com 728x90 Banner">
-      <div class="caption">
-        Image: <pre>http://images.bloquechain.com/DogeBloqueChain_728x90.jpg</pre>
-        HTML: <pre>&lt;center&gt;&lt;a href=&quot;{{referralURL}}{{address|default('{Your Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_728x90.jpg&quot;/&gt;&lt;/a&gt;&lt;/center&gt;</pre>
+    {% for bannerSizes in settings.referralBanners %}
+      <div class="thumbnail">
+        <h2>{{ loop.key }}</h2>
+        {% for banner in bannerSizes %}
+          <img src="{{ banner.img }}" alt="{{ banner.description }}">
+          <div class="caption">
+            Image: <pre>{{ banner.img }}</pre>
+            HTML: <pre>&lt;center&gt;&lt;a href=&quot;{{referralURL}}{{address|default('{Your Address}')}}&quot; &gt;&lt;img src=&quot;{{ banner.img }}&quot;/&gt;&lt;/a&gt;&lt;/center&gt;</pre>
+          </div>
+        {% endfor %}
       </div>
-    </div>
-
-    <div class="thumbnail">
-      <h2>468x60</h2>
-      <img src="http://images.bloquechain.com/DogeBloqueChain_468x60.jpg" alt="Doge.BloqueChain.com 468x60 Banner">
-      <div class="caption">
-        Image: <pre>http://images.bloquechain.com/DogeBloqueChain_468x60.jpg</pre>
-        HTML: <pre>&lt;center&gt;&lt;a href=&quot;{{referralURL}}{{address|default('{Your Address}')}}&quot; &gt;&lt;img src=&quot;http://images.bloquechain.com/DogeBloqueChain_468x60.jpg&quot;/&gt;&lt;/a&gt;&lt;/center&gt;</pre>
-      </div>
-    </div>
+    {% endfor %}
+    {% endif %}
 
     <h2>Signatures</h2>
     <div class="thumbnail">
