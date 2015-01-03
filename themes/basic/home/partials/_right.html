@@ -1,30 +1,41 @@
+{% if settings.ads.faucets[settings.site.coin.shortName] %}
+<div class='well'>
   <h4>Earn More {{settings.site.coin.shortName}}</h4>
   <p>
-    {% for faucet in settings.ads.faucets %}
+    {% for faucet in settings.ads.faucets[settings.site.coin.shortName] %}
       <a href='{{faucet.url}}' target='_blank'>{{faucet.name}}</a><br />
-    {% endfor %}
+    {% endfor %}    
   </p>
+</div>
+{% endif %}
 
-  <center>
-    <div>
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle"
-	   style="display:inline-block;width:300px;height:600px"
-	   data-ad-client="{{ settings.ads.google.publisher }}"
-    data-ad-slot="{{ settings.ads.google.slots[2] }}"></ins>
-      <script>
-	(adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+
+<center>
+  <div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+   style="display:inline-block;width:300px;height:600px"
+   data-ad-client="{{ settings.ads.google.publisher }}"
+  data-ad-slot="{{ settings.ads.google.slots[2] }}"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</center>
+
+{% if settings.ads.affiliates %}
+  {% for affiliateType in settings.ads.affiliates %}
+    <div class='well'>
+      <h3>{{affiliateType.type}}</h3>
+      <p>
+        {% for affiliate in affiliateType.referrals %}
+          <a href='{{affiliate.url}}' target='_blank'>{{affiliate.name}}</a><br />
+        {% endfor %}    
+      </p>
     </div>
-  </center>
+  {% endfor %}
+{% endif %}
 
-  <h4>Buy & Sell {{settings.site.coin.shortName}}</h4>
-  <p>
-    {% for affiliate in settings.ads.affiliates %}
-      <a href='{{affiliate.url}}' target='_blank'>{{affiliate.name}}</a><br />
-    {% endfor %}
-  </p>
-  
-  <center>
-    <iframe src="{{ settings.ads.amazon.slots[2] }}" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
-  </center>
+<center>
+  <iframe src="{{ settings.ads.amazon.slots[2] }}" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</center>
